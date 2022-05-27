@@ -6,19 +6,26 @@
         <h2>課程內容</h2>
         <p>課程名字：{{ $course->coname }}</p>
         <p>課程介紹：{{ $course->content }}</p>
-        <p>單元列表</p>
-        
-        @foreach (App\Models\course::all() as $course)
+        <h3>單元列表</h3>
+
+        @foreach (App\Models\unit::all() as $unit)
         <div class="accordion" id="accordionExample">
-            <div class="accordion-item">                
+            <div class="accordion-item">
                 <h2 class="accordion-header" id="headingOne">
-                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                    {{ $course->coname }}
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse{{ $unit->unid }}" aria-expanded="flase" aria-controls="collapse{{ $unit->unid }}">
+                        {{ $unit->unname }}
                     </button>
                 </h2>
-                <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                <div id="collapse{{ $unit->unid }}" class="accordion-collapse collapse hidden" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
                     <div class="accordion-body">
-                        <strong>This is the first test.</strong> {{ $course->content }}.
+                        <div class="d-flex justify-content-between">
+                            <div>
+                                {{ $unit->ucontent }}
+                            </div>
+                            <div>
+                                <a href="">{{ __('進入上課') }}</a>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

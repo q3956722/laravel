@@ -21,4 +21,8 @@ class unit extends Model
         "video_id",
         "ucontent"
     ];
+
+    public function note(){
+        return $this->hasMany(Note::class, 'noid', 'nocontent', 'userid', 'coid');
+    }
 }

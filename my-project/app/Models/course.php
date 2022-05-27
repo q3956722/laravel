@@ -21,4 +21,8 @@ class course extends Model
         "video_id",
         "content"
     ];
+
+    public function unit(){
+        return $this->hasMany(Unit::class, 'unid', 'level', 'unname', 'parent_id', 'video_id', 'ucontent');
+    }
 }

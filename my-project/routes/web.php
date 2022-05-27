@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CourseController;
 use App\Http\Controllers\UnitController;
 use App\Http\Controllers\NoteController;
+use App\Models\course;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -19,6 +20,9 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/nologin', function ($nl) {    
+    return view('nologin');
+});
 
 Auth::routes();
 
@@ -26,3 +30,15 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::resource('/course', CourseController::class);
 Route::resource('/unit', UnitController::class);
 Route::resource('/note', NoteController::class);
+
+
+Route::get('/course/{id}', function ($id) {
+    $course_id = course::select("coid","name")->where('parent_id',$id)->get()->toArray();
+    if(count($course_id)!=0){
+        $course_id[0]['content']=course::select("coid")->where('parent_id',$course_id[0]['coid'])->get()->toArray();
+    }
+
+    return json_encode($course_id);
+
+    //return view('welcome');
+});
