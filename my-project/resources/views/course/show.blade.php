@@ -23,7 +23,7 @@
                                 {{ $unit->ucontent }}
                             </div>
                             <div>
-                                <a href="">{{ __('進入上課') }}</a>
+                                <a href="{{ route('unit.show', [$unit->unid]) }}">{{ __('進入上課') }}</a>
                             </div>
                         </div>
                     </div>

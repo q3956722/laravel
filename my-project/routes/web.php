@@ -5,6 +5,7 @@ use App\Http\Controllers\CourseController;
 use App\Http\Controllers\UnitController;
 use App\Http\Controllers\NoteController;
 use App\Models\course;
+use App\Models\unit;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -41,4 +42,16 @@ Route::get('/course/{id}', function ($id) {
     return json_encode($course_id);
 
     //return view('welcome');
+});
+
+Route::get('/course/{id}',[CourseController::class, 'coid']);
+
+Route::get('/course/{coid}/{unit?}',function ($coid,$unid=null) {
+    if($unid == null){
+        return view('unit.index');
+    }else{
+        $unit = unit::select("unid")->where('');
+        return view('unit.show' , $unid);
+    }
+    
 });
