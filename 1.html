@@ -1,0 +1,33 @@
+Route::get('/course/{id}', function ($id) {
+    $course_id = course::select("coid","name")->where('parent_id',$id)->get()->toArray();
+    if(count($course_id)!=0){
+        $course_id[0]['content']=course::select("coid")->where('parent_id',$course_id[0]['coid'])->get()->toArray();
+    }
+
+    return json_encode($course_id);
+
+    //return view('welcome');
+});
+
+Route::get('/course/{coid}/unit/create',[UnitController::class, 'create']);
+
+Route::get('/course/{coid}/{unit?}',function ($coid,$unid=null) {
+    if($unid == null){
+        return view('unit.index');
+    }else{
+        $unit = unit::where(['coid'=>$coid])->get()->toArray();
+        return print_r( view('unit.show' , $unit));
+    }
+    
+});
+
+
+<div class="mb-3">
+    <label for="uncontent">單元內容</label>
+    <textarea type="text" class="ckeditor form-control" name="uncontent" id="uncontent" placeholder="請輸入課程內容" required>{{ old('uncontent',$unit->uncontent) }}</textarea>
+    <!-- <textarea type="text" name="uncontent" id="uncontent" class="form-control" placeholder="請輸入課程內容" rows="4" required>{{ old('uncontent',$unit->uncontent) }}</textarea> -->
+</div>
+<div class="mb-3">
+    <label for="unintro">單元介紹</label>
+    <input type="text" name="unintro" id="unintro" class="form-control" value="{{ old('unintro',$unit->unintro) }}" required>
+</div>

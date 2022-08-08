@@ -16,13 +16,20 @@ class unit extends Model
     protected $fillable=[
         "unid",
         "level",
+        "order",
         "unname",
-        "parent_id",
+        "pid",
         "video_id",
-        "ucontent"
+        "uncontent",
+        "unintro",
+        "visible"
     ];
 
     public function note(){
         return $this->hasMany(Note::class, 'noid', 'nocontent', 'userid', 'coid');
+    }
+
+    public function course(){
+        return $this->hasMany(Course::class, "coid", "level", "order", "coname", "pid", "content", "cointro");
     }
 }

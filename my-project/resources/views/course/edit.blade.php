@@ -20,7 +20,11 @@
                 </div>
                 <div class="mb-3">
                     <label for="content">課程內容</label>
-                    <textarea type="text" name="content" id="content" class="form-control" placeholder="請輸入課程內容" rows="4" required>{{ old('content',$course->content) }}</textarea>
+                    <textarea type="text" class="ckeditor form-control" name="content" id="content" placeholder="請輸入課程內容" required>{{ old('content',$course->content) }}</textarea>
+                </div>
+                <div class="mb-3">
+                    <label for="cointro">課程介紹</label>
+                    <textarea name="cointro" id="cointro" class="form-control"  cols="110" rows="4" placeholder="請輸入課程介紹" required>{{ old('cointro',$course->cointro) }}</textarea>
                 </div>
                 <button type="submit" class="btn btn-primary">Update</button>    
             </form>
@@ -32,6 +36,10 @@
                 @method('delete')
                 <button type="submit" class="btn btn-danger">Delete</button>
             </form>
+
+            <hr>
+
+            <a href="{{ route('course.show', [$course->coid] ) }}" class="text-white text-decoration-none" ><button type="submit" class="btn btn-primary">Back</button></a>  
         </div>
     </div>
 </div>

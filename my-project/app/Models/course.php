@@ -16,13 +16,16 @@ class course extends Model
     protected $fillable=[
         "coid",
         "level",
+        "order",
         "coname",
-        "parent_id",
-        "video_id",
-        "content"
+        "pid",
+        "content",
+        "cointro",
+        "visible"
     ];
 
     public function unit(){
-        return $this->hasMany(Unit::class, 'unid', 'level', 'unname', 'parent_id', 'video_id', 'ucontent');
+        return $this->hasMany(Unit::class, "unid", "level", "order", "unname", "pid", "video_id", "uncontent", "unintro");
     }
 }
+

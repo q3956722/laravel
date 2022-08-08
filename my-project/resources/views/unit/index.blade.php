@@ -7,23 +7,34 @@
             <div class="card">
                 <div class="card-header d-flex justify-content-between">
                     檢視者：{{ Auth::user()->name }}
-                    <a class="text-decoration-none" href="{{ route('unit.create') }}">{{ __('Create Post') }}</a>
+                    <a class="text-decoration-none" href="{{ route('unit.create') }}">{{ __('新增單元') }}</a>
                 </div>
 
                 <div class="card-body">
+                    <div class="mb-2">
+                        <a href="{{ url('/') }}">{{ __('首頁') }}</a>
+                        {{ __(' > ') }}
+                        <a href="{{route('course.index')}}">{{ __('課程選單') }}</a>
+                        {{ __(' > ') }}
+                        @foreach (App\Models\course::all() as $course)
+                            {{ $course->coname }}
+                        @endforeach
+                        {{ __(' > ') }}
+                        {{ __('單元選單') }}
+                    </div>
                     <table class="table">
                         <thead>
                             <tr>
-                                <th>單元名稱</th>
-                                <th>單元內容</th>
-                                <th class="d-flex justify-content-center">功能</th>
+                                <th class="col-md-2">單元名稱</th>
+                                <th class="col-md-8">單元介紹</th>
+                                <th class="col-md-2 text-center">功能</th>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach (App\Models\unit::all() as $unit)
                             <tr>
                                 <td><a href="{{ route('unit.show', $unit->unid) }}">{{ $unit->unname }}</a></td>
-                                <td>{{ $unit->ucontent }}</td>
+                                <td class="text-truncate overflow-hidden" style="max-width: 400px;">{{ $unit->unintro }}</td>
                                 <td>
                                     @auth
                                     <div class="d-flex justify-content-around">

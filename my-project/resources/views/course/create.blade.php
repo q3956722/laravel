@@ -11,14 +11,22 @@
                 <div class="mb-3">
                     <label for="coname">課程名稱</label>
                     <input type="text" name="coname" id="coname" class="form-control" placeholder="請輸入課程名稱" required>
-                </div>
+                </div>                
                 <div class="mb-3">
                     <label for="content">課程內容</label>
-                    <textarea type="text" name="content" id="content" class="form-control" placeholder="請輸入課程內容" rows="4" required></textarea>
+                    <textarea type="text" class="ckeditor form-control" name="content" id="content" required></textarea>
+                </div>
+                <div class="mb-3">
+                    <label for="cointro">課程介紹</label>
+                    <textarea name="cointro" id="cointro" class="form-control"  cols="110" rows="4" placeholder="請輸入課程介紹" required>{{ old('cointro',$course->cointro) }}</textarea>
                 </div>
                 <button type="submit" class="btn btn-primary">Create</button>
 
             </form>
+
+            <hr>
+
+            <a href="{{ route('unit.index') }}" class="text-white text-decoration-none" ><button type="submit" class="btn btn-primary">Back</button></a>  
         </div>
     </div>
 </div>
